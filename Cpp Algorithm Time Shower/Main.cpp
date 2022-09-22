@@ -3,7 +3,81 @@
 #include<chrono>
 #include<bits/stdc++.h>
 using namespace std;
-#define si 20
+#define si 100
+
+
+void Merge(int arr[],int low,int mid,int high){
+	  	int i = low;
+		int j = mid+1;
+		int k = low;
+		int temp[high+1];
+		while (i<= mid && j <= high)
+		{
+			if(arr[i]<arr[j]){
+				temp[k] = arr[i];
+				i++;
+				k++;
+			}else{
+				temp[k] = arr[j];
+				j++;
+				k++;
+			}
+		}
+		while(i<=mid){
+			temp[k] = arr[i];
+			i++;
+			k++;
+		}
+		while (j<=high)
+		{
+			temp[k] = arr[j];
+			j++;
+			k++;
+		}		
+	for (int io = low; io <= high; io++)
+	{
+		arr[io] = temp[io];
+	}
+
+
+}
+
+
+
+int pertition(int arr[],int low,int high){
+		int pivot = arr[low];
+		int i = low;
+		int j = high-1;
+		while(i<j){
+			do{ i++;} while(arr[i]<=pivot);
+			do{ j--;} while(arr[j]>pivot);
+			if(i < j){
+				swap(arr[i],arr[j]);
+			}
+		}
+		swap(arr[j],arr[low]);
+		return j;
+}
+void QuickSort(int arr[],int low,int high){
+	if(low<high){
+		int j = pertition(arr,low,high);
+		QuickSort(arr,low,j);
+		QuickSort(arr,j+1,high);
+	}
+}
+
+
+void MergeSort(int arr[],int low,int high){
+	if(low<high){
+		int mid = (low+high)/2;
+		MergeSort(arr,low,mid);
+		MergeSort(arr,mid+1,high);
+		Merge(arr,low,mid,high);
+
+	}	
+
+}
+
 class WAS{
 
 	int array[si];
@@ -19,10 +93,13 @@ class WAS{
 	void bubbleSort();
 	void incertionSort();
 	void selectionSort();
+	void msor();
 	void quicksort();
+	//Ba
 	void addIndx(int,int);
 	void appendx(int);
 };
+
 void WAS::menu(){
 	printArr();
 	cout<<"\t\t\t\tALgorithm Time Shower__"<<endl;
@@ -40,15 +117,23 @@ void WAS::menu(){
 	case 3:
 		incertionSort();
 		break;
+	case 4:
+		msor();
+		break;
 	case 5:
 		selectionSort();
 		break;
-
+	case 6:	
+		quicksort();
+		break;
 	default:
 		Builtin();	
 		bubbleSort();
 		incertionSort();
 		selectionSort();
+		quicksort();
+		msor();
+
 		break;
 	}
 
@@ -71,6 +156,28 @@ void WAS::addIndx(int indx,int itm){
 		icount++;
 
 	}
+}
+
+
+void WAS::quicksort(){
+	auto start = chrono::steady_clock::now();
+	QuickSort(array,0,icount);
+	auto end = chrono::steady_clock::now();
+	double gap = double(chrono::duration_cast<chrono::nanoseconds>(end-start).count());
+	cout<<"Time for Quick sort: " <<gap<<" Nanosec"<<endl; 
+
+
+}
+
+
+void WAS::msor(){
+
+	auto start = chrono::steady_clock::now();
+	MergeSort(array,0,icount);
+	auto end = chrono::steady_clock::now();
+	double gap = double(chrono::duration_cast<chrono::nanoseconds>(end-start).count());
+	cout<<"Time for Merge sort: " <<gap<<" Nanosec"<<endl; 
+
 }
 
 
@@ -99,6 +206,8 @@ void WAS::selectionSort(){
 	double gap = double(chrono::duration_cast<chrono::nanoseconds>(end-start).count());
 	cout<<"Time for Selection sort: " <<gap<<" Nanosec"<<endl; 
 }
+
+
 
 
 
@@ -142,7 +251,7 @@ void WAS::printArr(){
 	cout<<"[ ";
 	for (int i = 0; i < icount; i++)
 	{
-		cout<<array[i]<< " ";
+		cout<<array[i]<< ",";
 	}
 	
 	cout<<" ]"<<endl;
@@ -150,29 +259,32 @@ void WAS::printArr(){
 }
 
 
+
+
+
 int main() {
+	int r[100] = { 5,100,1,70,9,15,120,19,80,90,55,110,11,79,99,200,70,9,15,70,9,15,19,80,90,55,110,11,79,19,80,90,55,110,11,79,19,80,1090,55,110,1010,790};
+	int i = 0;
+	class WAS test1,test2,test3,test4,test5,test6;
+	while(r[i] != 0)
+	{
+		test1.appendx(r[i]);
+		test2.appendx(r[i]);
+		test3.appendx(r[i]);
+		test4.appendx(r[i]);
+		test5.appendx(r[i]);
+		test6.appendx(r[i]);
 
-	class WAS test1;
-
-	test1.appendx(5);
-	test1.appendx(100);
-	test1.appendx(1);
-	test1.appendx(70);
-	test1.appendx(9);
-	test1.appendx(15);
-	test1.appendx(120);
-	test1.appendx(19);
-	test1.appendx(80);
-	test1.appendx(90);
-	test1.appendx(55);
-	test1.appendx(110);
-	test1.appendx(11);
-	test1.appendx(79);
-	test1.appendx(99);
+		i++;
+	}
+	test1.Builtin();
+	test2.bubbleSort();
+	test3.incertionSort();
+	test4.selectionSort();
+	test5.quicksort();
+	test6.msor();
 	
-	test1.menu();
-
-
-
+	
+	
 	return 0;
 }
