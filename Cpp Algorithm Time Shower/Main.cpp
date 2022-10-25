@@ -58,6 +58,17 @@ int pertition(int arr[],int low,int high){
 		swap(arr[j],arr[low]);
 		return j;
 }
+
+
+
+
+
+
+
+
+
+
+
 void QuickSort(int arr[],int low,int high){
 	if(low<high){
 		int j = pertition(arr,low,high);
@@ -65,6 +76,18 @@ void QuickSort(int arr[],int low,int high){
 		QuickSort(arr,j+1,high);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 void MergeSort(int arr[],int low,int high){
@@ -248,13 +271,19 @@ void WAS::incertionSort(){
 
 
 void WAS::printArr(){
+	
+	
+	
+	
 	cout<<"[ ";
+	
 	for (int i = 0; i < icount; i++)
 	{
 		cout<<array[i]<< ",";
 	}
 	
 	cout<<" ]"<<endl;
+
 
 }
 
