@@ -1,4 +1,4 @@
-import random
+import secrets
 
 while True:
     preodic_table = {
@@ -47,7 +47,7 @@ while True:
     }
 
     keys = list(preodic_table)
-    x = random.choice(keys)
+    x = secrets.choice(keys)
 
     inp = input(f"Enter The Name Of {x} Number Mole: ")
     if preodic_table[x][0].lower() == inp.strip().lower():
