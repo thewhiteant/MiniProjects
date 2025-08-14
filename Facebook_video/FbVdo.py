@@ -2,6 +2,8 @@ import sys
 import requests
 import re
 import urllib.parse
+from security import safe_requests
+
 #video down
 
 def gv(url):
@@ -31,7 +33,7 @@ def gv(url):
             ree = urllib.parse.unquote(re)
             print("Downloading ... ")
             with open(f"Video.mp4", "wb") as f:
-                response = requests.get(ree, stream=True)
+                response = safe_requests.get(ree, stream=True)
                 total_length = response.headers.get('content-length')
                 if total_length is None:
                     pass
